@@ -11,6 +11,7 @@
 #include "uart.h"
 #include "matrixLED.h"
 
+
 unsigned char keyNumber;
 
 unsigned int initHour = 24;
@@ -178,20 +179,20 @@ void main()
     /**
      * LED点阵屏 8*8 单色
      */
-    // // _74HC595_Wr iteByte(0xFF); // 0xAA 10101010
-    // // P0 = 0x7F;                // 01111111
-    // MatrixLED_Init();
-    // while (1) {
-    //     /* code */
-    //     // MatrixLED_ShowColumn(0, 0x30, 1); // 00110000
-    //     // MatrixLED_ShowColumn(1, 0x78, 1); // 01111000
-    //     // MatrixLED_ShowColumn(2, 0x3C, 1); // 00111100
-    //     // MatrixLED_ShowColumn(3, 0x1E, 1); // 00011110
-    //     // MatrixLED_ShowColumn(4, 0x3C, 1); // 00111100
-    //     // MatrixLED_ShowColumn(5, 0x78, 1); // 01111000
-    //     // MatrixLED_ShowColumn(6, 0x30, 1); // 00110000
-    //     MatrixLED_ShowScroll(Hello, sizeof(Hello) / sizeof(Hello[0]));
-    // }
+    // _74HC595_Wr iteByte(0xFF); // 0xAA 10101010
+    // P0 = 0x7F;                // 01111111
+    MatrixLED_Init();
+    while (1) {
+        /* code */
+        // MatrixLED_ShowColumn(0, 0x30, 1); // 00110000
+        // MatrixLED_ShowColumn(1, 0x78, 1); // 01111000
+        // MatrixLED_ShowColumn(2, 0x3C, 1); // 00111100
+        // MatrixLED_ShowColumn(3, 0x1E, 1); // 00011110
+        // MatrixLED_ShowColumn(4, 0x3C, 1); // 00111100
+        // MatrixLED_ShowColumn(5, 0x78, 1); // 01111000
+        // MatrixLED_ShowColumn(6, 0x30, 1); // 00110000
+        MatrixLED_ShowScroll(Hello, sizeof(Hello) / sizeof(Hello[0]));
+    }
 
     /**
      * DS1302时钟模块

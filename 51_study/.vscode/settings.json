@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "MAIN.C": "cpp"
+        "MAIN.C": "cpp",
+        "stc89c5xrc_rdp.h": "c",
+        "nixie.h": "c"
     }
 }
