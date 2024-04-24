@@ -1,10 +1,10 @@
 {
-  "name": "51_study",
+  "name": "Led",
   "type": "C51",
   "dependenceList": [],
   "srcDirs": [
     "src",
-    "inc"
+    "ins"
   ],
   "outDir": "build",
   "virtualFolder": {
@@ -13,7 +13,7 @@
     "folders": []
   },
   "miscInfo": {
-    "uid": "df4651873e56ae64d6fa0a8b021f2d1c"
+    "uid": "93ae1a7132734fe2ef16a75f3343d8ad"
   },
   "targets": {
     "Release": {
@@ -32,7 +32,7 @@
       "custom_dep": {
         "name": "default",
         "incList": [
-          "inc"
+          "ins"
         ],
         "libList": [],
         "sourceDirList": [],

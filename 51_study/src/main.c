@@ -1,28 +1,10 @@
-#include "STC89C5xRC_RDP.H"
-#include "intrins.h"
-#include "delay.h"
-#include "nixie.h"
 
 #include "LCD1602.h"
-#include "led.h"
-#include "matrixKey.h"
-#include "Timer0.h"
+#include "DS1302.h"
 #include "key.h"
-#include "uart.h"
-#include "matrixLED.h"
-
+#include "Timer0.h"
 
 unsigned char keyNumber;
-
-unsigned int initHour = 24;
-unsigned int initMin  = 60;
-unsigned int initSec  = 0;
-// 小时
-unsigned int hour;
-// 分钟
-unsigned int min;
-// 秒数
-unsigned int sec;
 
 void main()
 {
@@ -181,22 +163,64 @@ void main()
      */
     // _74HC595_Wr iteByte(0xFF); // 0xAA 10101010
     // P0 = 0x7F;                // 01111111
-    MatrixLED_Init();
-    while (1) {
-        /* code */
-        // MatrixLED_ShowColumn(0, 0x30, 1); // 00110000
-        // MatrixLED_ShowColumn(1, 0x78, 1); // 01111000
-        // MatrixLED_ShowColumn(2, 0x3C, 1); // 00111100
-        // MatrixLED_ShowColumn(3, 0x1E, 1); // 00011110
-        // MatrixLED_ShowColumn(4, 0x3C, 1); // 00111100
-        // MatrixLED_ShowColumn(5, 0x78, 1); // 01111000
-        // MatrixLED_ShowColumn(6, 0x30, 1); // 00110000
-        MatrixLED_ShowScroll(Hello, sizeof(Hello) / sizeof(Hello[0]));
-    }
+    // MatrixLED_Init();
+    // while (1) {
+    //     /* code */
+    //     // MatrixLED_ShowColumn(0, 0x30, 1); // 00110000
+    //     // MatrixLED_ShowColumn(1, 0x78, 1); // 01111000
+    //     // MatrixLED_ShowColumn(2, 0x3C, 1); // 00111100
+    //     // MatrixLED_ShowColumn(3, 0x1E, 1); // 00011110
+    //     // MatrixLED_ShowColumn(4, 0x3C, 1); // 00111100
+    //     // MatrixLED_ShowColumn(5, 0x78, 1); // 01111000
+    //     // MatrixLED_ShowColumn(6, 0x30, 1); // 00110000
+    //     MatrixLED_ShowScroll(Hello, sizeof(Hello) / sizeof(Hello[0]));
+    // }
 
     /**
      * DS1302时钟模块
      */
+    LCD_Init();
+    DS1302_Init();
+    DS1302_WriteTime(24, 4, 24, 13, 51, 0);
+    while (1) {
+        // 独立按键扫描
+        keyNumber = keyScan();
+
+        if (keyNumber)
+        {
+            /* code */
+        }
+
+        switch (DS1302_Mode)
+        {
+        case 0:
+            break;
+        case 1:
+            break;
+        }
+        
+
+        // 年
+        LCD_ShowNum(1, 1, DS1302_ReadYear(), 2);
+        LCD_ShowString(1, 3, "-");
+        // 月
+        LCD_ShowNum(1, 4, DS1302_ReadMonth(), 2);
+        LCD_ShowString(1, 6, "-");
+        // 日
+        LCD_ShowNum(1, 7, DS1302_ReadDay(), 2);
+        // 星期
+        LCD_ShowString(1, 9, " ");
+        LCD_ShowNum(1, 10, DS1302_ReadWeek(), 1);
+
+        // 时
+        LCD_ShowNum(2, 1, DS1302_ReadHour(), 2);
+        LCD_ShowString(2, 3, ":");
+        // 分
+        LCD_ShowNum(2, 4, DS1302_ReadMinute(), 2);
+        LCD_ShowString(2, 6, ":");
+        // 秒
+        LCD_ShowNum(2, 7, DS1302_ReadSecond(), 2);
+    }
 }
 
 /**
